@@ -38,13 +38,13 @@ Example:
 
 By default, this setting is enabled:
 
-- thresholds: {
+- thresholds: `{
   performance: 10,
   accessibility: 30,
   'best-practices': 30,
   seo: 30,
   pwa: 30,
-  }
+  }`
 - htmlReport: true
 - outputDir: 'output',
 - reportFileName: 'accessibility-audit.html',
