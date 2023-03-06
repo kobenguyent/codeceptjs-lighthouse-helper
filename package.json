@@ -33,7 +33,8 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "README.md"
+    "README.md",
+    "bin/parallel.js"
   ],
   "release": {
     "branches": [

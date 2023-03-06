@@ -93,3 +93,35 @@ pwa record is 30 and desired threshold was 30
 
   OK  | 1 passed   // 16s
 ```
+
+### Parallel Executions
+It's a little tricky to run lighthouse tests in parallel due to we need to set a specific port for each test, but it's not impossible.
+To do this we need to create a [custom parallel execution](https://codecept.io/parallel/#custom-parallel-execution), an example could
+be found at `bin/parallel.js`
+
+Then your test file:
+```
+const {I} = inject()
+let conf = require('codeceptjs').config.get()
+let port
+const urls = { homepage: 'https://js.devexpress.com/Demos/WidgetsGallery/Demo/Slider/Overview/jQuery/Light/'}
+
+Feature('Performance tests')
+
+Before(() => {
+    conf.helpers.Playwright.chromium.args.forEach(arg => {
+        if (arg.includes('remote-debugging-port') === true) {
+            port = arg.split('=')[1]
+        }
+    })
+})
+
+Object.entries(urls).forEach(item => {
+    const [pageName, pageUrl] = item
+    Scenario.only(`Lighthouse audit test for ${pageName}`, async () => {
+        I.amOnPage(pageUrl)
+        await I.runPerformanceCheck({outputDir: 'hello', port})
+    })
+})
+
+```
