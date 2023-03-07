@@ -16,7 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "@codeceptjs/helper": "^2.0.1",
-    "axe-playwright": "^1.2.3",
     "lighthouse": "^9.6.8",
     "playwright-lighthouse": "^2.2.2"
   },
