@@ -130,3 +130,7 @@ Object.entries(urls).forEach(item => {
 })
 
 ```
+
+### Allure report
+![Screenshot 2023-06-28 at 17 31 20](https://github.com/kobenguyent/codeceptjs-lighthouse-helper/assets/7845001/05acc7b8-3001-4d3a-9f75-eec9312c972c)
+https://kobenguyent.github.io/codeceptjs-lighthouse-helper/#
