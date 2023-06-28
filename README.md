@@ -53,45 +53,50 @@ By default, this setting is enabled:
 More info could be found [here](https://www.npmjs.com/package/playwright-lighthouse)
 
 ```
-Feature('lighthouse Check');
-
-Scenario.only('lighthouse check',  async ({ I }) => {
-    I.amOnPage('https://js.devexpress.com/Demos/WidgetsGallery/Demo/Slider/Overview/jQuery/Light/')
-    await I.runPerformanceCheck({ outputDir: 'hello'})
+Feature("Performance Check with Lighthouse")
+	.config({
+		chromium: {
+			args: [`--remote-debugging-port=9222`],
+		},
+	})
+Scenario("Performance check", async () => {
+	I.amOnPage("https://js.devexpress.com/Demos/WidgetsGallery/Demo/Slider/Overview/jQuery/Light/");
+	await I.runPerformanceCheck({ reportFileName: 'customname' });
 });
 ```
 
 Output
 
 ```
+CodeceptJS v3.4.1 #StandWithUkraine
+Using test root "/Users/thanh.nguyen/Desktop/codeceptjs-lighthouse-helper/test"
 Helpers: Playwright, LighthouseHelper
-Plugins: screenshotOnFail, tryTo, retryTo, eachElement
+Plugins: screenshotOnFail, allure
 
-Lighthouse Audit tests --
+Performance Check with Lighthouse --
     [1]  Starting recording promises
+ › [Suite Config] Playwright {"chromium":{"args":["--remote-debugging-port=9222"]}}
     Timeouts: 
  › [Session] Starting singleton browser session
-  Lighthouse Audit tests for homepage
-    --- STARTED "before each" hook: Before for "Lighthouse Audit tests for homepage" ---
-    [1] Stopping recording promises
-    [2]  Starting recording promises
-    --- ENDED "before each" hook: Before for "Lighthouse Audit tests for homepage" ---
+  Performance check
     I am on page "https://js.devexpress.com/Demos/WidgetsGallery/Demo/Slider/Overview/jQuery/Light/"
-    I run performance check {"outputDir":"hello","port":"9222"}
+    I run performance check {"reportFileName":"customname"}
 
 
 -------- playwright lighthouse audit reports --------
 
 
-performance record is 42 and desired threshold was 10
+performance record is 74 and desired threshold was 10
 accessibility record is 78 and desired threshold was 30
 best-practices record is 100 and desired threshold was 30
 seo record is 92 and desired threshold was 30
 pwa record is 30 and desired threshold was 30
-  ✔ OK in 15914ms
+  ✔ OK in 14844ms
 
+ › [Suite Config] Reverted for Playwright
 
   OK  | 1 passed   // 16s
+
 ```
 
 ### Parallel Executions
